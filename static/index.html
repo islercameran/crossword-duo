@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Us, Together — Mini Crossword</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="name-screen" class="overlay">
+    <div class="card">
+      <h1>Us, Together 💕</h1>
+      <p>A tiny crossword for two. Enter your name to join.</p>
+      <input id="name-input" maxlength="20" placeholder="Your name" autofocus />
+      <button id="join-btn">Join the puzzle</button>
+    </div>
+  </div>
+
+  <div id="win-screen" class="overlay hidden">
+    <div class="card">
+      <h1>🎉 Solved it! 🎉</h1>
+      <p>You two make a great team.</p>
+      <button id="reset-btn">Play again</button>
+    </div>
+  </div>
+
+  <header>
+    <h1>Us, Together — Mini Crossword</h1>
+    <div id="player-list"></div>
+  </header>
+
+  <main>
+    <div id="grid"></div>
+    <div id="clues">
+      <div class="clue-col">
+        <h2>Across</h2>
+        <ul id="across-list"></ul>
+      </div>
+      <div class="clue-col">
+        <h2>Down</h2>
+        <ul id="down-list"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

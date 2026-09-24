@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Us, Together — Mini Crossword</title>
+<title>Mini Crossword</title>
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <div id="name-screen" class="overlay">
     <div class="card">
-      <h1>Us, Together 💕</h1>
-      <p>A tiny crossword for two. Enter your name to join.</p>
+      <h1>Mini Crossword</h1>
+      <p>Enter your name to join.</p>
       <input id="name-input" maxlength="20" placeholder="Your name" autofocus />
       <button id="join-btn">Join the puzzle</button>
     </div>
@@ -18,14 +18,15 @@
 
   <div id="win-screen" class="overlay hidden">
     <div class="card">
-      <h1>🎉 Solved it! 🎉</h1>
-      <p>You two make a great team.</p>
-      <button id="reset-btn">Play again</button>
+      <h1>Solved</h1>
+      <p>Nice work. Come back tomorrow for a new one.</p>
+      <button id="reset-btn">Clear the grid</button>
     </div>
   </div>
 
   <header>
-    <h1>Us, Together — Mini Crossword</h1>
+    <h1>Mini Crossword</h1>
+    <div id="puzzle-date"></div>
     <div id="player-list"></div>
   </header>
 

@@ -1,0 +1,127 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, #ffeef8, #eef5ff);
+  color: #2b2b40;
+  min-height: 100vh;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+header h1 { font-size: 18px; margin: 0; }
+#player-list { display: flex; gap: 8px; }
+.player-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  padding: 16px 24px 48px;
+}
+#grid {
+  display: grid;
+  grid-template-columns: repeat(5, 56px);
+  grid-template-rows: repeat(5, 56px);
+  gap: 3px;
+  background: #2b2b40;
+  padding: 3px;
+  border-radius: 8px;
+}
+.cell {
+  position: relative;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell.block { background: #2b2b40; }
+.cell input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: transparent;
+  outline: none;
+  color: #2b2b40;
+}
+.cell input:focus { background: #fff3ba; }
+.cell .num {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 9px;
+  color: #999;
+  font-weight: 600;
+}
+.cell .cursor-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.cell.correct input { color: #1b9c5b; }
+#clues {
+  display: flex;
+  gap: 24px;
+  min-width: 260px;
+}
+.clue-col h2 { font-size: 15px; margin-bottom: 8px; }
+.clue-col ul { list-style: none; padding: 0; margin: 0; }
+.clue-col li {
+  font-size: 14px;
+  padding: 4px 0;
+  cursor: default;
+}
+.clue-col li b { margin-right: 4px; }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 43, 64, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.overlay.hidden { display: none; }
+.card {
+  background: white;
+  padding: 32px 40px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 320px;
+}
+.card h1 { margin-top: 0; }
+.card input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin: 12px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.card button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ff6b9d;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}

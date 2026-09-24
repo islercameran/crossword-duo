@@ -1,6 +1,7 @@
 const socket = io();
 let puzzle = null;
 let myName = "";
+let pendingState = null; // state that arrived before the puzzle finished loading
 const inputs = {}; // "r-c" -> input element
 const dots = {}; // "r-c" -> dot element
 
@@ -11,6 +12,20 @@ async function loadPuzzle() {
   puzzle = await res.json();
   buildGrid();
   buildClues();
+  showDate();
+  if (pendingState) {
+    const data = pendingState;
+    pendingState = null;
+    applyStateEvent(data);
+  }
+}
+
+function showDate() {
+  const [y, m, d] = puzzle.date.split("-").map(Number);
+  document.getElementById("puzzle-date").textContent =
+    new Date(y, m - 1, d).toLocaleDateString(undefined, {
+      weekday: "long", month: "long", day: "numeric",
+    });
 }
 
 function isBlock(r, c) {
@@ -138,9 +153,22 @@ function hideWin() {
   document.getElementById("win-screen").classList.add("hidden");
 }
 
-socket.on("state", (data) => {
+function applyStateEvent(data) {
+  // The board rolls over at midnight ET; pick up the new puzzle and clues.
+  if (data.date !== puzzle.date) {
+    location.reload();
+    return;
+  }
   applyState(data.cells);
   if (data.solved) showWin(); else hideWin();
+}
+
+socket.on("state", (data) => {
+  if (!puzzle) {
+    pendingState = data;
+    return;
+  }
+  applyStateEvent(data);
 });
 
 socket.on("cell_update", (data) => {
@@ -171,6 +199,14 @@ socket.on("cursor_update", (data) => {
     dot.style.display = "block";
     dot.style.background = "#4ecdc4";
   }
+});
+
+// A tab left open overnight should pick up the new day when it's looked at again.
+document.addEventListener("visibilitychange", async () => {
+  if (document.hidden || !puzzle) return;
+  const res = await fetch("/api/puzzle");
+  const latest = await res.json();
+  if (latest.date !== puzzle.date) location.reload();
 });
 
 document.getElementById("join-btn").addEventListener("click", join);
